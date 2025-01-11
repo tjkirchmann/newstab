@@ -1,10 +1,8 @@
 // CONSTANTS
 const DELAY = 7000; // x / 1000 = seconds of delay
-const EXAMPLE_SITES = [
-    'https://news.ycombinator.com',
-    'https://www.bbc.com/news',
-    'https://www.cnn.com'
-];
+const EXAMPLE_FEEDS = {
+    "Startups": "https://rss.app/embed/v1/wall/tL1eKlNe7dSq3ahe"
+}
 const NEWSCONTAINER = document.getElementById('news-container');
 
 
@@ -18,11 +16,19 @@ let newsSites = user_sites.length > 0 ? user_sites : EXAMPLE_SITES;
 // Update function
 function updateNews() {
     // Set next site
-    let currentSite = newSites[index];
+    let currentSite = newsSites[index];
     console.log(`Updating News Sources... [${currentSite}]`)
 
-    // Get Site and replace background image
-    NEWSCONTAINER.style.backgroundImage = `url('${currentSite}')`;
+    // Clear existing content
+    NEWSCONTAINER.innerHTML = '';
+
+    // Create and insert an iframe
+    const iframe = document.createElement('iframe');
+    iframe.src = newsSites[index];
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.border = 'none';
+    NEWSCONTAINER.appendChild(iframe);
 
     // Update index for next loop
     index = (index + 1) % newsSites.length;

@@ -1,4 +1,5 @@
 function updateClock() {
+    console.log("Updating Clock...")
     var currentTime = new Date(),
         currentHours = currentTime.getHours(),
         currentMinutes = ('0' + currentTime.getMinutes()).slice(-2);
